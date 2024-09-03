@@ -11,10 +11,10 @@ load_dotenv()
 app = Flask(__name__)
 
 genai.configure(api_key=os.getenv('GEMINI_API_KEY'))
-model_name = os.getenv('GEMINI_MODEL_NAME')
+
 
 # Initialize the Gemini model (Move this line here)
-model = genai.GenerativeModel(model_name) 
+model = genai.GenerativeModel('gemini-1.5-flash') 
 
 # WordPress details
 wordpress_api_endpoint = "https://nustudy.com/wp-json/wp/v2/posts" 
