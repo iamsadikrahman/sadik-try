@@ -1,0 +1,33 @@
+/* style.css
+body {
+    font-family: sans-serif;
+}
+
+#prompt {
+    width: 80%;
+    height: 200px;
+    margin-bottom: 10px;
+}
+
+#output {
+    border: 1px solid #ccc;
+    padding: 10px;
+    min-height: 300px;
+} */
+
+
+body {
+    font-family: sans-serif;
+}
+
+#prompt {
+    width: 80%;
+    height: 200px;
+    margin-bottom: 10px;
+}
+
+#output {
+    border: 1px solid #ccc;
+    padding: 10px;
+    min-height: 300px;
+}
