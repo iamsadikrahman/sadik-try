@@ -10,10 +10,7 @@ load_dotenv()
 
 app = Flask(__name__)
 
-genai.configure(api_key=os.getenv('GEMINI_API_KEY'))
-
-
-# Initialize the Gemini model (Move this line here)
+# Initialize the Gemini model
 model = genai.GenerativeModel('gemini-1.5-flash') 
 
 # WordPress details
@@ -23,7 +20,7 @@ wordpress_password = os.getenv('WORDPRESS_PASSWORD')
 
 def generate_content(prompt):
     # Generate text using the Gemini model
-    response = model.generate_content(prompt) # type: ignore
+    response = model.generate_content(prompt) 
 
     # Check for response text and handle potential empty responses
     if response.text:
