@@ -8,17 +8,21 @@ import os
 
 load_dotenv() 
 
+# Flask app setup
 app = Flask(__name__)
 
-genai.configure(api_key=os.getenv('GEMINI_API_KEY'))
-# Initialize the Gemini model
+# Directly assign the API keys and credentials as string variables
+gemini_api_key = "AIzaSyDdl7HwiYvpTYOCh_UFzcKKXs3295_ctCw"
+wordpress_username = "zannat"
+wordpress_password = "RRmL 3N7i leHU XVdP c0RN s4ZO"
+
+# Configure the Gemini model using the variable
+genai.configure(api_key=gemini_api_key)
 model = genai.GenerativeModel('gemini-1.5-flash') 
 
-
-# WordPress details
+# WordPress setup (using the variables directly)
 wordpress_api_endpoint = "https://nustudy.com/wp-json/wp/v2/posts" 
-wordpress_username = os.getenv('WORDPRESS_USERNAME')
-wordpress_password = os.getenv('WORDPRESS_PASSWORD')
+
 
 def generate_content(prompt):
     # Generate text using the Gemini model
