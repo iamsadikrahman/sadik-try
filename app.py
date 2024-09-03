@@ -1,63 +1,29 @@
-# #app.py
-
-# from flask import Flask, render_template, request
-# import google.generativeai as genai
-
-# app = Flask(__name__)
-
-# genai.configure(api_key='AIzaSyDdl7HwiYvpTYOCh_UFzcKKXs3295_ctCw')  # আপনার Gemini API কী দিয়ে প্রতিস্থাপন করুন
-
-# # Initialize the Gemini model
-# model = genai.GenerativeModel("gemini-1.5-flash") 
-
-# def generate_content(prompt):
-#     # Generate text using the Gemini model
-#     response = model.generate_content(prompt)
-
-#     # Check for response text and handle potential empty responses
-#     if response.text:
-#         return response.text
-#     else:
-#         # Handle potential content filtering gracefully
-#         return "কন্টেন্ট তৈরি করতে সমস্যা হয়েছে। অনুগ্রহ করে প্রম্পটটি পর্যালোচনা করুন অথবা সম্ভাব্য নিরাপত্তা উদ্বেগগুলি পরীক্ষা করুন।"
-
-# @app.route('/')
-# def index():
-#     return render_template('index.html')
-
-# @app.route('/generate', methods=['POST'])
-# def generate():
-#     prompt = request.form['prompt']
-#     generated_content = generate_content(prompt)
-#     return generated_content
-
-# if __name__ == '__main__':
-#     app.run(debug=True)
-
-
-# app.py
-
 from flask import Flask, render_template, request
 import google.generativeai as genai
 import requests
 import base64
 import time
+from dotenv import load_dotenv
+import os
+
+load_dotenv() 
 
 app = Flask(__name__)
 
-genai.configure(api_key='AIzaSyDdl7HwiYvpTYOCh_UFzcKKXs3295_ctCw')  # আপনার Gemini API কী দিয়ে প্রতিস্থাপন করুন
+genai.configure(api_key=os.getenv('GEMINI_API_KEY'))
+model_name = os.getenv('GEMINI_MODEL_NAME')
 
-# Initialize the Gemini model
-model = genai.GenerativeModel("gemini-1.5-flash") 
+# Initialize the Gemini model (Move this line here)
+model = genai.GenerativeModel(model_name) 
 
 # WordPress details
 wordpress_api_endpoint = "https://nustudy.com/wp-json/wp/v2/posts" 
-wordpress_username = "zannat"
-wordpress_password = "RRmL 3N7i leHU XVdP c0RN s4ZO"
+wordpress_username = os.getenv('WORDPRESS_USERNAME')
+wordpress_password = os.getenv('WORDPRESS_PASSWORD')
 
 def generate_content(prompt):
     # Generate text using the Gemini model
-    response = model.generate_content(prompt)
+    response = model.generate_content(prompt) # type: ignore
 
     # Check for response text and handle potential empty responses
     if response.text:
